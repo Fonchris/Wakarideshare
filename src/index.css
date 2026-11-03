@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #0a0a0a;
+}
+
+@keyframes auth-blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5%, 5%) scale(1.1); }
+}
+
+.auth-blob {
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.24;
+  animation: auth-blob-drift 12s ease-in-out infinite;
+}
+
+.auth-blob-one {
+  left: -10rem;
+  top: 10%;
+  background: #818cf8;
+}
+
+.auth-blob-two {
+  right: -10rem;
+  bottom: 0;
+  background: #c084fc;
+  animation-delay: -5s;
+}
+
+.dark .auth-blob-one {
+  background: #525252;
+}
+
+.dark .auth-blob-two {
+  background: #262626;
+}
+
+.auth-input {
+  display: block;
+  height: 2.75rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(229 229 229);
+  background: rgb(255 255 255 / 0.7);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: box-shadow 150ms, border-color 150ms;
+}
+
+.auth-input:focus {
+  border-color: rgb(129 140 248);
+  box-shadow: 0 0 0 3px rgb(129 140 248 / 0.2);
+}
+
+.dark .auth-input {
+  border-color: rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.05);
+  color: white;
+}
+
+.dark .auth-input:focus {
+  border-color: rgb(163 163 163);
+  box-shadow: 0 0 0 3px rgb(163 163 163 / 0.2);
+}
