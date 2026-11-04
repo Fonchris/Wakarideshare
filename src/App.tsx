@@ -83,7 +83,7 @@ function App() {
               content: language === 'fr'
                 ? 'Découvrez une expérience pensée pour transformer vos idées en projets mémorables.'
                 : 'Choose a destination corridor and see who is leaving around the same time.',
-              image: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1400&q=85',
+              image: '/chateau-ngoakelle.jpg',
             },
             {
               step: language === 'fr' ? 'Étape 2' : 'Step 2',
@@ -91,7 +91,7 @@ function App() {
               content: language === 'fr'
                 ? 'Utilisez des outils flexibles et une direction claire pour construire avec confiance.'
                 : 'Join a small group, agree on destinations, and choose a public meeting point.',
-              image: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1400&q=85',
+              image: '/university-campus.png',
             },
             {
               step: language === 'fr' ? 'Étape 3' : 'Step 3',
@@ -99,7 +99,7 @@ function App() {
               content: language === 'fr'
                 ? 'Passez de l’inspiration à l’action et partagez quelque chose qui vous ressemble.'
                 : 'One person orders the ride, everyone contributes, and the group leaves together.',
-              image: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1400&q=85',
+              image: '/yango-taxi.png',
             },
           ]}
         />

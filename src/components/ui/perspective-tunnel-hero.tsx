@@ -12,15 +12,18 @@ import { useEffect, useRef, useState } from "react";
 import type { Language } from "../site-navbar";
 
 const IMAGES = [
-  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85", title: "Find your people" },
-  { src: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=85", title: "Share the taxi route" },
-  { src: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=85", title: "Ngoa-Ekelle departures" },
-  { src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85", title: "Agree contributions" },
-  { src: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=900&q=85", title: "Leave after class" },
-  { src: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=85", title: "Build trust" },
-  { src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85", title: "Meet your group" },
-  { src: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=900&q=85", title: "Catch your ride" },
-  { src: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=900&q=85", title: "Waka together" },
+  { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85", title: "Find your people" },
+  { src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=85", title: "Share the taxi route" },
+  { src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=85", title: "Ngoa-Ekelle departures" },
+  { src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85", title: "Agree contributions" },
+  { src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85", title: "Leave after class" },
+  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85", title: "Build trust" },
+  { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=900&q=85", title: "Meet your group" },
+  { src: "/chateau-ngoakelle.jpg", title: "Château Ngoa-Ekelle" },
+  { src: "/university-campus.png", title: "University of Yaoundé I" },
+  { src: "/yango-taxi.png", title: "Yango pickup" },
+  { src: "/yellow-taxis.png", title: "Yellow taxis in Yaoundé" },
+  { src: "/waka-passengers.png", title: "Waka together" },
 ];
 
 interface TunnelCardData {
