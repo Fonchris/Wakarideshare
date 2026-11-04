@@ -32,7 +32,7 @@ export default function SiteNavbar({
           href="#top"
           className="text-sm font-semibold uppercase tracking-[0.24em] text-neutral-950 dark:text-white"
         >
-          Ether<span className="text-indigo-500 dark:text-white">.</span>
+          Waka<span className="text-indigo-500 dark:text-white">.</span>
         </a>
         <div className="flex items-center gap-1">
           {authenticatedEmail ? (
