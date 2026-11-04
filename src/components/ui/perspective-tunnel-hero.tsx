@@ -12,15 +12,15 @@ import { useEffect, useRef, useState } from "react";
 import type { Language } from "../site-navbar";
 
 const IMAGES = [
-  { src: "https://cdn.21st.dev/assets/mirror/c3/c3fbd2afa140223999a441b32ed986f61d473930002708df805a81532a326aac.jpg", title: "Chroma I" },
-  { src: "https://cdn.21st.dev/assets/mirror/9d/9d8b2f675a5814476ada3736ce439bcda23c5c389e0ebf9b25d8a0c09f3bbcfe.jpg", title: "Prism III" },
-  { src: "https://cdn.21st.dev/assets/mirror/8b/8bb738bf2f00d7f7ed3c3ec034adb9938ad38f4be4ac191d632a6a11ad525574.jpg", title: "Ether IV" },
-  { src: "https://cdn.21st.dev/assets/mirror/ac/ac5ac700b188d7ef16ee9dab868098b59f15c440db3f71d4e8c03262a3287577.jpg", title: "Quantum V" },
-  { src: "https://cdn.21st.dev/assets/mirror/ef/ef25eff6ce655fba459b3b7e7711524dc92499aa18f6c7dbea9a0fcc56a8f908.jpg", title: "Nebula VI" },
-  { src: "https://cdn.21st.dev/assets/mirror/f2/f28b370a5dcbf76240f1504579c4b05fc0ff0bb990a42aff8dc2f73a5dc46072.jpg", title: "Cyber VII" },
-  { src: "https://cdn.21st.dev/assets/mirror/f2/f26a1eac85704dda924820392dedfb72d51d8261d35354f83b35d683617295f3.jpg", title: "Flux VIII" },
-  { src: "https://cdn.21st.dev/assets/mirror/77/7755d23eaaa0aa5b403343f44afa7a29b2d06d3065fe54c602b14ba01d00f2aa.jpg", title: "Aether IX" },
-  { src: "https://cdn.21st.dev/assets/mirror/65/657317761fe9058a1d43711b13c543a71eb5199b7a5d9abf4c28479674e39cf7.jpg", title: "Chroma X" },
+  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85", title: "Find your people" },
+  { src: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=85", title: "Share the taxi route" },
+  { src: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=85", title: "Ngoa-Ekelle departures" },
+  { src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85", title: "Agree contributions" },
+  { src: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=900&q=85", title: "Leave after class" },
+  { src: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=85", title: "Build trust" },
+  { src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85", title: "Meet your group" },
+  { src: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=900&q=85", title: "Catch your ride" },
+  { src: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=900&q=85", title: "Waka together" },
 ];
 
 interface TunnelCardData {
@@ -202,17 +202,17 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
         className="pointer-events-none z-0 flex max-w-xl flex-col items-center px-6 text-center"
       >
         <p className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-indigo-600 dark:text-neutral-300">
-          {language === "fr" ? "Séquence de propulsion" : "Warp Drive Sequence"}
+          {language === "fr" ? "Le tableau de départ" : "The departure board"}
         </p>
         <h1 className="bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-400 bg-clip-text text-5xl font-bold leading-[0.9] tracking-tighter text-transparent sm:text-7xl md:text-8xl dark:from-white dark:via-white dark:to-white/40">
-          {language === "fr" ? "DANS L'" : "INTO THE"}
+          {language === "fr" ? "WAKA" : "WAKA"}
           <br />
-          {language === "fr" ? "ÉTHER." : "ETHER."}
+          {language === "fr" ? "ENSEMBLE." : "RIDE SHARE."}
         </h1>
         <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-600 sm:text-base dark:text-neutral-400">
           {language === "fr"
-            ? "Faites défiler votre pavé tactile ou votre souris pour traverser le corridor spatial en 3D."
-            : "Scroll your trackpad or mouse wheel to fly through the spatial 3D corridor."}
+            ? "Trouvez des personnes qui vont dans votre direction, organisez votre départ et rentrez ensemble."
+            : "Find people going your way, organise your departure, and get home together."}
         </p>
       </motion.div>
 
@@ -220,7 +220,7 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
         style={{ opacity: promptOpacity }}
         className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400"
       >
-        <span>{language === "fr" ? "Faites défiler pour explorer" : "Scroll to Explore"}</span>
+        <span>{language === "fr" ? "Faites défiler pour découvrir Waka" : "Scroll to discover Waka"}</span>
         <div className="h-6 w-px bg-gradient-to-b from-indigo-500 to-transparent dark:from-white dark:to-transparent" />
       </motion.div>
 

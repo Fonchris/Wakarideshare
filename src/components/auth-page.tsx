@@ -28,10 +28,10 @@ export default function AuthPage({
 
   const copy = isFrench
     ? {
-        loginTitle: "Bon retour dans l’éther.",
-        signupTitle: "Entrez dans l’éther.",
-        loginDescription: "Connectez-vous pour retrouver votre espace créatif.",
-        signupDescription: "Créez votre compte et commencez votre prochaine expérience.",
+        loginTitle: "Bon retour sur Waka.",
+        signupTitle: "Rejoignez Waka.",
+        loginDescription: "Connectez-vous pour retrouver vos groupes de trajet.",
+        signupDescription: "Créez votre compte et trouvez des personnes qui vont dans votre direction.",
         name: "Nom complet",
         email: "Adresse e-mail",
         password: "Mot de passe",
@@ -42,13 +42,13 @@ export default function AuthPage({
         loginLink: "Se connecter",
         signupLink: "Créer un compte",
         back: "Retour à l’accueil",
-        benefits: ["Un espace pour vos idées", "Une expérience fluide et personnelle", "Accès à toutes vos explorations"],
+        benefits: ["Trouvez votre corridor", "Organisez un départ partagé", "Rentrez avec plus de sérénité"],
       }
     : {
-        loginTitle: "Welcome back to the ether.",
-        signupTitle: "Step into the ether.",
-        loginDescription: "Sign in to return to your creative space.",
-        signupDescription: "Create your account and start your next experience.",
+        loginTitle: "Welcome back to Waka.",
+        signupTitle: "Join Waka.",
+        loginDescription: "Sign in to find your ride groups.",
+        signupDescription: "Create an account and find people going your way.",
         name: "Full name",
         email: "Email address",
         password: "Password",
@@ -59,7 +59,7 @@ export default function AuthPage({
         loginLink: "Sign in",
         signupLink: "Create an account",
         back: "Back to home",
-        benefits: ["A space for your ideas", "A fluid, personal experience", "Access to every exploration"],
+        benefits: ["Find your corridor", "Organise a shared departure", "Get home with less stress"],
       };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -84,14 +84,14 @@ export default function AuthPage({
         <div className="hidden flex-col justify-between bg-neutral-950 p-10 text-white lg:flex">
           <div>
             <div className="mb-12 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em]">
-              Ether<span className="text-indigo-400 dark:text-white">.</span>
+              Waka<span className="text-indigo-400 dark:text-white">.</span>
             </div>
             <Sparkles className="mb-6 size-8 text-indigo-400 dark:text-neutral-300" aria-hidden="true" />
             <h2 className="max-w-sm text-3xl font-semibold tracking-tight">
               {isFrench ? "Créez sans limites." : "Create without limits."}
             </h2>
             <p className="mt-4 max-w-sm text-sm leading-6 text-neutral-400">
-              {isFrench ? "Rejoignez une communauté qui transforme les idées en expériences." : "Join a community turning ambitious ideas into memorable experiences."}
+              {isFrench ? "Rejoignez une communauté qui rentre ensemble." : "Join a community that helps people get home together."}
             </p>
           </div>
           <ul className="space-y-4 text-sm text-neutral-300">
@@ -109,7 +109,7 @@ export default function AuthPage({
         <div className="p-6 sm:p-10 lg:p-14">
           <div className="mb-8 lg:hidden">
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Ether<span className="text-indigo-500 dark:text-white">.</span>
+              Waka<span className="text-indigo-500 dark:text-white">.</span>
             </span>
           </div>
           <div className="mb-8">

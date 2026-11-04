@@ -22,18 +22,18 @@ export default function Hero07({ language, onGetStarted }: HeroProps) {
           onClick={onGetStarted}
           className="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-200 dark:border-white/10 dark:bg-white/10 dark:text-neutral-200 dark:hover:bg-white/15"
         >
-          {isFrench ? "Découvrez la collection" : "Discover the collection"}
+          {isFrench ? "Organisez votre prochain trajet" : "Organise your next ride"}
           <ArrowUpRight className="ml-1 size-4" aria-hidden="true" />
         </button>
         <h2 className="mx-auto mt-6 max-w-xl text-4xl font-medium tracking-tight sm:text-[2.75rem] md:text-6xl/[1.2]">
           {isFrench
-            ? "Des expériences numériques qui marquent les esprits"
-            : "Ship digital experiences that stay with people"}
+            ? "Rentrez ensemble, plus sereinement"
+            : "Find your route. Share the ride. Get home safer."}
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400 md:text-xl">
           {isFrench
-            ? "Une base élégante pour créer, explorer et donner vie à vos prochaines idées."
-            : "A thoughtful foundation for creating, exploring, and bringing your next idea to life."}
+            ? "Waka aide les étudiants et les civils à trouver des personnes qui prennent le même chemin, au même moment."
+            : "Waka helps students and civilians find people taking the same route at the same time."}
         </p>
         <div className="mt-12 flex items-center justify-center gap-4">
           <button
@@ -49,7 +49,7 @@ export default function Hero07({ language, onGetStarted }: HeroProps) {
             className="inline-flex h-11 items-center justify-center rounded-full border border-neutral-200 px-8 text-sm font-medium text-neutral-800 transition-colors hover:bg-neutral-100 dark:border-white/15 dark:text-white dark:hover:bg-white/10"
           >
             <CirclePlay className="mr-2 size-5" aria-hidden="true" />
-            {isFrench ? "Voir le tunnel" : "Watch the tunnel"}
+            {isFrench ? "Voir les trajets" : "See departures"}
           </a>
         </div>
       </div>
