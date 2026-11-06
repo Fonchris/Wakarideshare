@@ -12,13 +12,11 @@ import { useEffect, useRef, useState } from "react";
 import type { Language } from "../site-navbar";
 
 const IMAGES = [
-  { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85", title: "Find your people" },
-  { src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=85", title: "Share the taxi route" },
-  { src: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=85", title: "Ngoa-Ekelle departures" },
-  { src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85", title: "Agree contributions" },
-  { src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85", title: "Leave after class" },
-  { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85", title: "Build trust" },
-  { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=900&q=85", title: "Meet your group" },
+  { src: "/waka-passengers.png", title: "Waka together" },
+  { src: "/yango-taxi.png", title: "Yango pickup" },
+  { src: "/yellow-taxis.png", title: "Yellow taxis in Yaoundé" },
+  { src: "/chateau-ngoakelle.jpg", title: "Château Ngoa-Ekelle" },
+  { src: "/university-campus.png", title: "University of Yaoundé I" },
   { src: "/chateau-ngoakelle.jpg", title: "Château Ngoa-Ekelle" },
   { src: "/university-campus.png", title: "University of Yaoundé I" },
   { src: "/yango-taxi.png", title: "Yango pickup" },
@@ -192,27 +190,27 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
   return (
     <div
       ref={containerRef}
-      className="relative flex h-[100svh] w-screen select-none items-center justify-center overflow-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-white"
+      className="relative flex h-[100svh] w-screen select-none items-center justify-center overflow-hidden bg-[#090807] text-neutral-50"
       style={{ perspective: stage.isMobile ? "900px" : "1200px", transformStyle: "preserve-3d" }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-70 [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)] dark:bg-[radial-gradient(#1e1b4b_1px,transparent_1px)] dark:opacity-65" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.15)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)]" />
-      <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-indigo-500/15 dark:border-white/10" />
-      <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-neutral-300/60 dark:border-white/10" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#6b4b2a_1px,transparent_1px)] opacity-35 [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,111,45,0.2)_0%,transparent_70%)]" />
+      <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-amber-500/15" />
+      <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-neutral-700/60" />
 
       <motion.div
         style={{ scale: titleScale, opacity: titleOpacity }}
         className="pointer-events-none z-0 flex max-w-xl flex-col items-center px-6 text-center"
       >
-        <p className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-indigo-600 dark:text-neutral-300">
+        <p className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-amber-400">
           {language === "fr" ? "Le tableau de départ" : "The departure board"}
         </p>
-        <h1 className="bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-400 bg-clip-text text-5xl font-bold leading-[0.9] tracking-tighter text-transparent sm:text-7xl md:text-8xl dark:from-white dark:via-white dark:to-white/40">
+        <h1 className="bg-gradient-to-b from-white via-amber-100 to-amber-500 bg-clip-text text-5xl font-bold leading-[0.9] tracking-tighter text-transparent sm:text-7xl md:text-8xl">
           {language === "fr" ? "WAKA" : "WAKA"}
           <br />
           {language === "fr" ? "ENSEMBLE." : "RIDE SHARE."}
         </h1>
-        <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-600 sm:text-base dark:text-neutral-400">
+        <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-300 sm:text-base">
           {language === "fr"
             ? "Trouvez des personnes qui vont dans votre direction, organisez votre départ et rentrez ensemble."
             : "Find people going your way, organise your departure, and get home together."}
@@ -221,10 +219,10 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
 
       <motion.div
         style={{ opacity: promptOpacity }}
-        className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400"
+        className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-neutral-400"
       >
         <span>{language === "fr" ? "Faites défiler pour découvrir Waka" : "Scroll to discover Waka"}</span>
-        <div className="h-6 w-px bg-gradient-to-b from-indigo-500 to-transparent dark:from-white dark:to-transparent" />
+        <div className="h-6 w-px bg-gradient-to-b from-amber-400 to-transparent" />
       </motion.div>
 
       <div className="pointer-events-none absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
