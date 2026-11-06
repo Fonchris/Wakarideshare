@@ -5,7 +5,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #0a0a0a;
+  background: #fafaf9;
+  color: #171717;
+}
+
+.dark body {
+  background: #0c0a09;
+  color: #fafaf9;
 }
 
 @keyframes auth-blob-drift {
@@ -46,6 +52,7 @@ body {
 
 .auth-input {
   display: block;
+  box-sizing: border-box;
   height: 2.75rem;
   width: 100%;
   border-radius: 0.75rem;
@@ -55,6 +62,15 @@ body {
   font-size: 0.875rem;
   outline: none;
   transition: box-shadow 150ms, border-color 150ms;
+}
+
+.auth-input--leading {
+  padding-left: 2.75rem;
+}
+
+.auth-input--password {
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
 }
 
 .auth-input:focus {

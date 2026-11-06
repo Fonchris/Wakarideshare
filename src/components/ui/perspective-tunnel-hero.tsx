@@ -111,7 +111,7 @@ function TunnelCard({ card, progress, pointer, total, stage }: TunnelCardProps) 
       style={{ width: cardWidth, transform, opacity, zIndex: card.index + 1 }}
       className="pointer-events-auto absolute left-1/2 top-1/2 aspect-[4/5] cursor-pointer select-none will-change-transform"
     >
-      <div className="group relative h-full w-full overflow-hidden rounded-2xl bg-neutral-200 shadow-2xl shadow-neutral-950/20 ring-1 ring-black/10 transition-all duration-500 hover:ring-indigo-500/70 hover:shadow-indigo-500/25 dark:bg-neutral-900 dark:shadow-black/90 dark:ring-white/15 dark:hover:ring-white/40 dark:hover:shadow-white/10">
+      <div className="group relative h-full w-full overflow-hidden rounded-2xl bg-neutral-200 shadow-2xl shadow-neutral-950/20 ring-1 ring-black/10 transition-all duration-500 hover:ring-amber-500/70 hover:shadow-amber-500/25 dark:bg-neutral-900 dark:shadow-black/90 dark:ring-white/15 dark:hover:ring-white/40 dark:hover:shadow-white/10">
         <img
           src={card.item.src}
           alt={card.item.title}
@@ -190,13 +190,13 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
   return (
     <div
       ref={containerRef}
-      className="relative flex h-[100svh] w-screen select-none items-center justify-center overflow-hidden bg-[#090807] text-neutral-50"
+      className="relative flex h-[100svh] w-screen select-none items-center justify-center overflow-hidden bg-stone-50 text-neutral-950 dark:bg-[#090807] dark:text-neutral-50"
       style={{ perspective: stage.isMobile ? "900px" : "1200px", transformStyle: "preserve-3d" }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#6b4b2a_1px,transparent_1px)] opacity-35 [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(180,111,45,0.2)_0%,transparent_70%)]" />
-      <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-amber-500/15" />
-      <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-neutral-700/60" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#a16207_1px,transparent_1px)] opacity-20 [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)] dark:opacity-35" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.12)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(180,111,45,0.2)_0%,transparent_70%)]" />
+      <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-amber-500/20" />
+      <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-neutral-300/70 dark:border-neutral-700/60" />
 
       <motion.div
         style={{ scale: titleScale, opacity: titleOpacity }}
@@ -205,12 +205,12 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
         <p className="mb-4 text-xs font-mono uppercase tracking-[0.4em] text-amber-400">
           {language === "fr" ? "Le tableau de départ" : "The departure board"}
         </p>
-        <h1 className="bg-gradient-to-b from-white via-amber-100 to-amber-500 bg-clip-text text-5xl font-bold leading-[0.9] tracking-tighter text-transparent sm:text-7xl md:text-8xl">
+        <h1 className="bg-gradient-to-b from-neutral-950 via-amber-700 to-amber-500 bg-clip-text text-5xl font-bold leading-[0.9] tracking-tighter text-transparent dark:from-white dark:via-amber-100 dark:to-amber-500 sm:text-7xl md:text-8xl">
           {language === "fr" ? "WAKA" : "WAKA"}
           <br />
           {language === "fr" ? "ENSEMBLE." : "RIDE SHARE."}
         </h1>
-        <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-300 sm:text-base">
+        <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-600 dark:text-neutral-300 sm:text-base">
           {language === "fr"
             ? "Trouvez des personnes qui vont dans votre direction, organisez votre départ et rentrez ensemble."
             : "Find people going your way, organise your departure, and get home together."}
@@ -219,7 +219,7 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
 
       <motion.div
         style={{ opacity: promptOpacity }}
-        className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-neutral-400"
+        className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400"
       >
         <span>{language === "fr" ? "Faites défiler pour découvrir Waka" : "Scroll to discover Waka"}</span>
         <div className="h-6 w-px bg-gradient-to-b from-amber-400 to-transparent" />

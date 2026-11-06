@@ -1,4 +1,5 @@
 import { Languages, LogIn, LogOut, Moon, Sun, UserPlus } from "lucide-react";
+import { BrandLogo } from "./brand-logo";
 
 export type Language = "en" | "fr";
 
@@ -30,9 +31,9 @@ export default function SiteNavbar({
       <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-neutral-200/70 bg-white/75 px-4 py-2 shadow-lg shadow-neutral-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/70 dark:shadow-black/20">
         <a
           href="#top"
-          className="text-sm font-semibold uppercase tracking-[0.24em] text-neutral-950 dark:text-white"
+          className="shrink-0"
         >
-          Waka<span className="text-indigo-500 dark:text-white">.</span>
+          <BrandLogo imageClassName="w-28 sm:w-32" />
         </a>
         <div className="flex items-center gap-1">
           {authenticatedEmail ? (
@@ -46,7 +47,7 @@ export default function SiteNavbar({
                 <LogIn className="size-4" aria-hidden="true" />
                 {isFrench ? "Connexion" : "Log in"}
               </button>
-              <button type="button" onClick={onSignup} className="hidden h-9 items-center gap-2 rounded-full bg-neutral-950 px-4 text-xs font-medium text-white transition-colors hover:bg-indigo-600 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 sm:inline-flex">
+              <button type="button" onClick={onSignup} className="hidden h-9 items-center gap-2 rounded-full bg-amber-500 px-4 text-xs font-medium text-neutral-950 transition-colors hover:bg-amber-400 sm:inline-flex">
                 <UserPlus className="size-4" aria-hidden="true" />
                 {isFrench ? "Commencer" : "Get started"}
               </button>

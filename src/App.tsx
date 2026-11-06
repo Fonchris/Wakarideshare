@@ -3,10 +3,11 @@ import Hero07 from './components/ui/hero-07'
 import SiteNavbar, { type Language } from './components/site-navbar'
 import { useEffect, useState } from 'react'
 import AuthPage, { type AuthView } from './components/auth-page'
-import { AtSign, BriefcaseBusiness, Code2, Mail, NotepadTextDashed } from 'lucide-react'
+import { AtSign, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
 import { Footer } from './components/ui/modem-animated-footer'
 import { FeatureSteps } from './components/ui/feature-section'
 import RideBoard from './components/ride-board'
+import { BrandLogo } from './components/brand-logo'
 
 function App() {
   const [language, setLanguage] = useState<Language>(() => {
@@ -121,7 +122,7 @@ function App() {
           { label: language === 'fr' ? 'Trouver un trajet' : 'Find a ride', href: '#find-a-ride' },
           { label: language === 'fr' ? 'Accueil' : 'Home', href: '#top' },
         ]}
-        brandIcon={<NotepadTextDashed className="size-10 text-white dark:text-neutral-950 md:size-14" />}
+        brandIcon={<BrandLogo imageClassName="w-20 sm:w-28 md:w-40" />}
       />
     </>
   )
