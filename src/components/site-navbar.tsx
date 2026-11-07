@@ -12,6 +12,7 @@ interface SiteNavbarProps {
   onLogin: () => void;
   onSignup: () => void;
   onLogout: () => void;
+  onHome: () => void;
 }
 
 export default function SiteNavbar({
@@ -23,6 +24,7 @@ export default function SiteNavbar({
   onLogin,
   onSignup,
   onLogout,
+  onHome,
 }: SiteNavbarProps) {
   const isFrench = language === "fr";
 
@@ -31,6 +33,10 @@ export default function SiteNavbar({
       <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-neutral-200/70 bg-white/75 px-4 py-2 shadow-lg shadow-neutral-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-neutral-950/70 dark:shadow-black/20">
         <a
           href="#top"
+          onClick={(event) => {
+            event.preventDefault();
+            onHome();
+          }}
           className="shrink-0"
         >
           <BrandLogo imageClassName="w-28 sm:w-32" />

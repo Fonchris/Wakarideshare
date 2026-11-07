@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, MapPinned, Route, Sparkles } from "lucide-react";
+import { Check, MapPinned, Route, Sparkles } from "lucide-react";
 import { SignIn, SignUp } from "@clerk/react";
 import { useState } from "react";
 import type { Language } from "./site-navbar";
@@ -9,14 +9,12 @@ export type AuthView = "login" | "signup";
 interface AuthPageProps {
   language: Language;
   view: AuthView;
-  onBack: () => void;
   onOpenTerms: () => void;
 }
 
 export default function AuthPage({
   language,
   view,
-  onBack,
   onOpenTerms,
 }: AuthPageProps) {
   const isFrench = language === "fr";
@@ -25,11 +23,9 @@ export default function AuthPage({
 
   const copy = isFrench
     ? {
-        back: "Retour à l’accueil",
         benefits: ["Trouvez votre corridor", "Organisez un départ partagé", "Rentrez avec plus de sérénité"],
       }
     : {
-        back: "Back to home",
         benefits: ["Find your corridor", "Organise a shared departure", "Get home with less stress"],
       };
 
@@ -52,6 +48,7 @@ export default function AuthPage({
       socialButtons: "flex w-full justify-center",
       socialButtonsBlockButton: "min-h-11 border border-neutral-300 dark:border-neutral-700",
       socialButtonsBlockButton__google: "mx-auto w-40 justify-center",
+      socialButtonsBlockButtonText: "text-neutral-900 dark:text-white",
       socialButtonsBlockButton__apple: "hidden",
       dividerRow: "hidden",
       footerActionLink: "text-amber-700 dark:text-amber-300",
@@ -62,15 +59,6 @@ export default function AuthPage({
     <main className="relative flex min-h-[100svh] items-start justify-center overflow-x-hidden overflow-y-auto bg-neutral-50 px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(5rem,calc(1.5rem+env(safe-area-inset-top)))] text-neutral-950 sm:items-center sm:px-4 sm:py-24 dark:bg-neutral-950 dark:text-white">
       <div className="auth-blob auth-blob-one" aria-hidden="true" />
       <div className="auth-blob auth-blob-two" aria-hidden="true" />
-      <button
-        type="button"
-        onClick={onBack}
-        className="absolute left-[max(1rem,env(safe-area-inset-left))] top-[max(1rem,env(safe-area-inset-top))] z-10 inline-flex min-h-11 items-center gap-2 px-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white sm:left-8 sm:top-6"
-      >
-        <ArrowLeft className="size-4" aria-hidden="true" />
-        {copy.back}
-      </button>
-
       <section className="relative z-10 grid w-full max-w-5xl overflow-hidden rounded-[1.5rem] border border-neutral-200/80 bg-white/80 shadow-2xl shadow-amber-950/10 backdrop-blur-xl sm:rounded-[2rem] dark:border-white/10 dark:bg-neutral-900/75 dark:shadow-black/30 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="hidden flex-col bg-neutral-950 p-10 text-white lg:flex">
           <div>

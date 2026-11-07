@@ -24,6 +24,7 @@ interface FooterProps {
   creatorUrl?: string;
   brandIcon?: ReactNode;
   className?: string;
+  onHome?: () => void;
 }
 
 export const Footer = ({
@@ -35,6 +36,7 @@ export const Footer = ({
   creatorUrl,
   brandIcon,
   className,
+  onHome,
 }: FooterProps) => {
   return (
     <section className={cn("relative mt-0 w-full overflow-hidden", className)}>
@@ -77,6 +79,12 @@ export const Footer = ({
                       key={link.label}
                       className="duration-300 hover:font-semibold hover:text-neutral-950 dark:hover:text-white"
                       href={link.href}
+                      onClick={(event) => {
+                        if (link.href === "#top" && onHome) {
+                          event.preventDefault();
+                          onHome();
+                        }
+                      }}
                     >
                       {link.label}
                     </a>

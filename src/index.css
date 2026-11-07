@@ -22,6 +22,14 @@
   justify-content: center !important;
 }
 
+.cl-socialButtonsBlockButtonText__google {
+  color: #171717 !important;
+}
+
+.dark .cl-socialButtonsBlockButtonText__google {
+  color: #fafafa !important;
+}
+
 body {
   margin: 0;
   min-width: 320px;

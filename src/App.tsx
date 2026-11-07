@@ -35,53 +35,51 @@ function App() {
     localStorage.setItem('language', language)
   }, [language])
 
-  if (showTerms && !user) {
-    return (
-      <>
-        <SiteNavbar
-          language={language}
-          darkMode={darkMode}
-          onLanguageChange={() => setLanguage((current) => current === 'en' ? 'fr' : 'en')}
-          onThemeChange={() => setDarkMode((current) => !current)}
-          authenticatedEmail={null}
-          onLogin={() => {
-            setShowTerms(false)
-            setAuthView('login')
-          }}
-          onSignup={() => {
-            setShowTerms(false)
-            setAuthView('signup')
-          }}
-          onLogout={() => undefined}
-        />
-        <TermsPage language={language} onBack={() => setShowTerms(false)} />
-      </>
-    )
+  const goHome = () => {
+    setAuthView(null)
+    setShowTerms(false)
+    window.location.hash = 'top'
   }
 
-  if (authView && !user) {
-    return (
-      <AuthPage
-        language={language}
-        view={authView}
-        onBack={() => setAuthView(null)}
-        onOpenTerms={() => setShowTerms(true)}
-      />
-    )
-  }
+  const footer = (
+    <Footer
+      brandName="Waka"
+      brandDescription={
+        language === 'fr'
+          ? 'Trouvez votre trajet. Partagez la course. Rentrez plus sereinement.'
+          : 'Find your route, share the ride, and get home with less stress.'
+      }
+      socialLinks={[
+        { icon: <AtSign className="size-6" />, href: 'https://twitter.com', label: 'Twitter' },
+        { icon: <BriefcaseBusiness className="size-6" />, href: 'https://linkedin.com', label: 'LinkedIn' },
+        { icon: <Code2 className="size-6" />, href: 'https://github.com', label: 'GitHub' },
+        { icon: <Mail className="size-6" />, href: 'mailto:hello@wakarideshare.example', label: 'Email' },
+      ]}
+      navLinks={[
+        { label: language === 'fr' ? 'Trouver un trajet' : 'Find a ride', href: '#find-a-ride' },
+        { label: language === 'fr' ? 'Accueil' : 'Home', href: '#top' },
+      ]}
+      brandIcon={<BrandLogo imageClassName="w-20 sm:w-28 md:w-40" />}
+      onHome={goHome}
+    />
+  )
 
-  return (
+  const pageContent = showTerms && !user ? (
+    <TermsPage
+      language={language}
+      onBack={() => {
+        setShowTerms(false)
+        setAuthView('signup')
+      }}
+    />
+  ) : authView && !user ? (
+    <AuthPage
+      language={language}
+      view={authView}
+      onOpenTerms={() => setShowTerms(true)}
+    />
+  ) : (
     <>
-      <SiteNavbar
-        language={language}
-        darkMode={darkMode}
-        onLanguageChange={() => setLanguage((current) => current === 'en' ? 'fr' : 'en')}
-        onThemeChange={() => setDarkMode((current) => !current)}
-        authenticatedEmail={authenticatedEmail}
-        onLogin={() => setAuthView('login')}
-        onSignup={() => setAuthView('signup')}
-        onLogout={() => void signOut()}
-      />
       <main id="top">
         <PerspectiveTunnelHero language={language} />
         <div id="explore">
@@ -124,25 +122,30 @@ function App() {
           ]}
         />
       </main>
-      <Footer
-        brandName="Waka"
-        brandDescription={
-          language === 'fr'
-            ? 'Trouvez votre trajet. Partagez la course. Rentrez plus sereinement.'
-            : 'Find your route, share the ride, and get home with less stress.'
-        }
-        socialLinks={[
-          { icon: <AtSign className="size-6" />, href: 'https://twitter.com', label: 'Twitter' },
-          { icon: <BriefcaseBusiness className="size-6" />, href: 'https://linkedin.com', label: 'LinkedIn' },
-          { icon: <Code2 className="size-6" />, href: 'https://github.com', label: 'GitHub' },
-          { icon: <Mail className="size-6" />, href: 'mailto:hello@wakarideshare.example', label: 'Email' },
-        ]}
-        navLinks={[
-          { label: language === 'fr' ? 'Trouver un trajet' : 'Find a ride', href: '#find-a-ride' },
-          { label: language === 'fr' ? 'Accueil' : 'Home', href: '#top' },
-        ]}
-        brandIcon={<BrandLogo imageClassName="w-20 sm:w-28 md:w-40" />}
+    </>
+  )
+
+  return (
+    <>
+      <SiteNavbar
+        language={language}
+        darkMode={darkMode}
+        onLanguageChange={() => setLanguage((current) => current === 'en' ? 'fr' : 'en')}
+        onThemeChange={() => setDarkMode((current) => !current)}
+        authenticatedEmail={authenticatedEmail}
+        onLogin={() => {
+          setShowTerms(false)
+          setAuthView('login')
+        }}
+        onHome={goHome}
+        onSignup={() => {
+          setShowTerms(false)
+          setAuthView('signup')
+        }}
+        onLogout={() => void signOut()}
       />
+      {pageContent}
+      {footer}
     </>
   )
 }
