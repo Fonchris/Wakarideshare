@@ -26,6 +26,20 @@ function App() {
   const authenticatedEmail = user?.primaryEmailAddress?.emailAddress ?? user?.username ?? user?.fullName ?? null
 
   useEffect(() => {
+    const syncAuthView = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash === 'login' || hash === 'signup') {
+        setShowTerms(false)
+        setAuthView(hash)
+      }
+    }
+
+    syncAuthView()
+    window.addEventListener('hashchange', syncAuthView)
+    return () => window.removeEventListener('hashchange', syncAuthView)
+  }, [])
+
+  useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
     localStorage.setItem('theme', darkMode ? 'dark' : 'light')
   }, [darkMode])
@@ -39,6 +53,12 @@ function App() {
     setAuthView(null)
     setShowTerms(false)
     window.location.hash = 'top'
+  }
+
+  const openAuth = (view: AuthView) => {
+    setShowTerms(false)
+    setAuthView(view)
+    window.location.hash = view
   }
 
   const footer = (
@@ -69,26 +89,28 @@ function App() {
       language={language}
       onBack={() => {
         setShowTerms(false)
-        setAuthView('signup')
+        openAuth('signup')
       }}
     />
   ) : authView && !user ? (
     <AuthPage
       language={language}
       view={authView}
+      darkMode={darkMode}
       onOpenTerms={() => setShowTerms(true)}
+      onSwitchView={openAuth}
     />
   ) : (
     <>
       <main id="top">
         <PerspectiveTunnelHero language={language} />
         <div id="explore">
-          <Hero07 language={language} onGetStarted={() => setAuthView('signup')} />
+          <Hero07 language={language} onGetStarted={() => openAuth('signup')} />
         </div>
         <RideBoard
           language={language}
           authenticatedEmail={isLoaded ? authenticatedEmail : null}
-          onSignup={() => setAuthView('signup')}
+          onSignup={() => openAuth('signup')}
         />
         <FeatureSteps
           title={language === 'fr' ? 'Votre parcours commence ici' : 'Your journey starts here'}
@@ -134,13 +156,11 @@ function App() {
         onThemeChange={() => setDarkMode((current) => !current)}
         authenticatedEmail={authenticatedEmail}
         onLogin={() => {
-          setShowTerms(false)
-          setAuthView('login')
+          openAuth('login')
         }}
         onHome={goHome}
         onSignup={() => {
-          setShowTerms(false)
-          setAuthView('signup')
+          openAuth('signup')
         }}
         onLogout={() => void signOut()}
       />

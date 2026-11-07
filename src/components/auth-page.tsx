@@ -9,16 +9,19 @@ export type AuthView = "login" | "signup";
 interface AuthPageProps {
   language: Language;
   view: AuthView;
+  darkMode: boolean;
   onOpenTerms: () => void;
+  onSwitchView: (view: AuthView) => void;
 }
 
 export default function AuthPage({
   language,
   view,
+  darkMode,
   onOpenTerms,
+  onSwitchView,
 }: AuthPageProps) {
   const isFrench = language === "fr";
-  const isDark = document.documentElement.classList.contains("dark");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const copy = isFrench
@@ -31,12 +34,12 @@ export default function AuthPage({
 
   const clerkAppearance = {
     variables: {
-      colorPrimary: isDark ? "#fbbf24" : "#d97706",
-      colorText: isDark ? "#fafafa" : "#171717",
-      colorTextSecondary: isDark ? "#a3a3a3" : "#525252",
-      colorBackground: isDark ? "#171717" : "#ffffff",
-      colorInputBackground: isDark ? "#262626" : "#ffffff",
-      colorInputText: isDark ? "#fafafa" : "#171717",
+      colorPrimary: "#d97706",
+      colorText: darkMode ? "#fafafa" : "#171717",
+      colorTextSecondary: darkMode ? "#a3a3a3" : "#525252",
+      colorBackground: darkMode ? "#171717" : "#ffffff",
+      colorInputBackground: darkMode ? "#262626" : "#ffffff",
+      colorInputText: darkMode ? "#fafafa" : "#171717",
       borderRadius: "0.75rem",
     },
     elements: {
@@ -51,7 +54,7 @@ export default function AuthPage({
       socialButtonsBlockButtonText: "text-neutral-900 dark:text-white",
       socialButtonsBlockButton__apple: "hidden",
       dividerRow: "hidden",
-      footerActionLink: "text-amber-700 dark:text-amber-300",
+      footerAction: "!hidden",
     },
   };
 
@@ -60,14 +63,14 @@ export default function AuthPage({
       <div className="auth-blob auth-blob-one" aria-hidden="true" />
       <div className="auth-blob auth-blob-two" aria-hidden="true" />
       <section className="relative z-10 grid w-full max-w-5xl overflow-hidden rounded-[1.5rem] border border-neutral-200/80 bg-white/80 shadow-2xl shadow-amber-950/10 backdrop-blur-xl sm:rounded-[2rem] dark:border-white/10 dark:bg-neutral-900/75 dark:shadow-black/30 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="hidden flex-col bg-neutral-950 p-10 text-white lg:flex">
+        <div className="hidden flex-col bg-neutral-100 p-10 text-neutral-950 lg:flex dark:bg-neutral-950 dark:text-white">
           <div>
             <BrandLogo imageClassName="w-36" />
             <Sparkles className="mb-6 size-8 text-amber-400 dark:text-amber-300" aria-hidden="true" />
             <h2 className="max-w-sm text-3xl font-semibold tracking-tight">
               {isFrench ? "Créez sans limites." : "Create without limits."}
             </h2>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-neutral-400">
+            <p className="mt-4 max-w-sm text-sm leading-6 text-neutral-600 dark:text-neutral-400">
               {isFrench ? "Rejoignez une communauté qui rentre ensemble." : "Join a community that helps people get home together."}
             </p>
           </div>
@@ -83,7 +86,7 @@ export default function AuthPage({
               </span>
             </div>
           </div>
-          <ul className="space-y-4 text-sm text-neutral-300">
+          <ul className="space-y-4 text-sm text-neutral-700 dark:text-neutral-300">
             {copy.benefits.map((benefit) => (
               <li key={benefit} className="flex items-center gap-3">
                 <span className="flex size-5 items-center justify-center rounded-full bg-amber-500/20 text-amber-700 dark:bg-white/10 dark:text-amber-300">
@@ -126,17 +129,31 @@ export default function AuthPage({
               {view === "login" ? (
                 <SignIn
                   routing="hash"
-                  signUpUrl="/signup"
+                  signUpUrl="#signup"
                   appearance={clerkAppearance}
                 />
               ) : (
                 <SignUp
                   routing="hash"
-                  signInUrl="/login"
+                  signInUrl="#login"
                   appearance={clerkAppearance}
                 />
               )}
             </div>
+            <p className="mt-5 text-center text-sm text-neutral-600 dark:text-neutral-400">
+              {view === "login"
+                ? (isFrench ? "Pas encore de compte ?" : "Don't have an account?")
+                : (isFrench ? "Vous avez déjà un compte ?" : "Already have an account?")}{" "}
+              <button
+                type="button"
+                onClick={() => onSwitchView(view === "login" ? "signup" : "login")}
+                className="font-medium text-amber-700 underline underline-offset-2 dark:text-amber-300"
+              >
+                {view === "login"
+                  ? (isFrench ? "Créer un compte" : "Sign up")
+                  : (isFrench ? "Se connecter" : "Sign in")}
+              </button>
+            </p>
           </div>
         </div>
       </section>
