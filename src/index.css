@@ -1,6 +1,27 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Apple is disabled until Apple Developer OAuth credentials are configured. */
+.cl-socialButtonsBlockButton__apple {
+  display: none !important;
+}
+
+.cl-dividerRow {
+  display: none !important;
+}
+
+.cl-socialButtons {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.cl-socialButtonsBlockButton__google {
+  width: 10rem !important;
+  margin-inline: auto !important;
+  justify-content: center !important;
+}
+
 body {
   margin: 0;
   min-width: 320px;

@@ -3,11 +3,13 @@ import Hero07 from './components/ui/hero-07'
 import SiteNavbar, { type Language } from './components/site-navbar'
 import { useEffect, useState } from 'react'
 import AuthPage, { type AuthView } from './components/auth-page'
+import { useClerk, useUser } from '@clerk/react'
 import { AtSign, BriefcaseBusiness, Code2, Mail } from 'lucide-react'
 import { Footer } from './components/ui/modem-animated-footer'
 import { FeatureSteps } from './components/ui/feature-section'
 import RideBoard from './components/ride-board'
 import { BrandLogo } from './components/brand-logo'
+import TermsPage from './components/terms-page'
 
 function App() {
   const [language, setLanguage] = useState<Language>(() => {
@@ -18,7 +20,10 @@ function App() {
     return stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
   })
   const [authView, setAuthView] = useState<AuthView | null>(null)
-  const [authenticatedEmail, setAuthenticatedEmail] = useState<string | null>(() => localStorage.getItem('authenticatedEmail'))
+  const [showTerms, setShowTerms] = useState(false)
+  const { user, isLoaded } = useUser()
+  const { signOut } = useClerk()
+  const authenticatedEmail = user?.primaryEmailAddress?.emailAddress ?? user?.username ?? user?.fullName ?? null
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
@@ -30,20 +35,37 @@ function App() {
     localStorage.setItem('language', language)
   }, [language])
 
-  const handleAuthenticated = (email: string) => {
-    setAuthenticatedEmail(email)
-    localStorage.setItem('authenticatedEmail', email)
-    setAuthView(null)
+  if (showTerms && !user) {
+    return (
+      <>
+        <SiteNavbar
+          language={language}
+          darkMode={darkMode}
+          onLanguageChange={() => setLanguage((current) => current === 'en' ? 'fr' : 'en')}
+          onThemeChange={() => setDarkMode((current) => !current)}
+          authenticatedEmail={null}
+          onLogin={() => {
+            setShowTerms(false)
+            setAuthView('login')
+          }}
+          onSignup={() => {
+            setShowTerms(false)
+            setAuthView('signup')
+          }}
+          onLogout={() => undefined}
+        />
+        <TermsPage language={language} onBack={() => setShowTerms(false)} />
+      </>
+    )
   }
 
-  if (authView) {
+  if (authView && !user) {
     return (
       <AuthPage
         language={language}
         view={authView}
-        onViewChange={setAuthView}
-        onAuthenticated={handleAuthenticated}
         onBack={() => setAuthView(null)}
+        onOpenTerms={() => setShowTerms(true)}
       />
     )
   }
@@ -58,10 +80,7 @@ function App() {
         authenticatedEmail={authenticatedEmail}
         onLogin={() => setAuthView('login')}
         onSignup={() => setAuthView('signup')}
-        onLogout={() => {
-          setAuthenticatedEmail(null)
-          localStorage.removeItem('authenticatedEmail')
-        }}
+        onLogout={() => void signOut()}
       />
       <main id="top">
         <PerspectiveTunnelHero language={language} />
@@ -70,7 +89,7 @@ function App() {
         </div>
         <RideBoard
           language={language}
-          authenticatedEmail={authenticatedEmail}
+          authenticatedEmail={isLoaded ? authenticatedEmail : null}
           onSignup={() => setAuthView('signup')}
         />
         <FeatureSteps

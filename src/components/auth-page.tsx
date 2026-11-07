@@ -1,6 +1,6 @@
-import { ArrowLeft, ArrowRight, Check, Eye, EyeOff, LockKeyhole, Mail, Sparkles, UserRound } from "lucide-react";
+import { ArrowLeft, Check, MapPinned, Route, Sparkles } from "lucide-react";
+import { SignIn, SignUp } from "@clerk/react";
 import { useState } from "react";
-import type { FormEvent } from "react";
 import type { Language } from "./site-navbar";
 import { BrandLogo } from "./brand-logo";
 
@@ -9,80 +9,70 @@ export type AuthView = "login" | "signup";
 interface AuthPageProps {
   language: Language;
   view: AuthView;
-  onViewChange: (view: AuthView) => void;
-  onAuthenticated: (email: string) => void;
   onBack: () => void;
+  onOpenTerms: () => void;
 }
 
 export default function AuthPage({
   language,
   view,
-  onViewChange,
-  onAuthenticated,
   onBack,
+  onOpenTerms,
 }: AuthPageProps) {
   const isFrench = language === "fr";
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const isDark = document.documentElement.classList.contains("dark");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const copy = isFrench
     ? {
-        loginTitle: "Bon retour sur Waka.",
-        signupTitle: "Rejoignez Waka.",
-        loginDescription: "Connectez-vous pour retrouver vos groupes de trajet.",
-        signupDescription: "Créez votre compte et trouvez des personnes qui vont dans votre direction.",
-        name: "Nom complet",
-        email: "Adresse e-mail",
-        password: "Mot de passe",
-        login: "Se connecter",
-        signup: "Créer mon compte",
-        switchLogin: "Vous avez déjà un compte ?",
-        switchSignup: "Pas encore de compte ?",
-        loginLink: "Se connecter",
-        signupLink: "Créer un compte",
         back: "Retour à l’accueil",
         benefits: ["Trouvez votre corridor", "Organisez un départ partagé", "Rentrez avec plus de sérénité"],
       }
     : {
-        loginTitle: "Welcome back to Waka.",
-        signupTitle: "Join Waka.",
-        loginDescription: "Sign in to find your ride groups.",
-        signupDescription: "Create an account and find people going your way.",
-        name: "Full name",
-        email: "Email address",
-        password: "Password",
-        login: "Sign in",
-        signup: "Create account",
-        switchLogin: "Already have an account?",
-        switchSignup: "Don't have an account yet?",
-        loginLink: "Sign in",
-        signupLink: "Create an account",
         back: "Back to home",
         benefits: ["Find your corridor", "Organise a shared departure", "Get home with less stress"],
       };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onAuthenticated(email);
+  const clerkAppearance = {
+    variables: {
+      colorPrimary: isDark ? "#fbbf24" : "#d97706",
+      colorText: isDark ? "#fafafa" : "#171717",
+      colorTextSecondary: isDark ? "#a3a3a3" : "#525252",
+      colorBackground: isDark ? "#171717" : "#ffffff",
+      colorInputBackground: isDark ? "#262626" : "#ffffff",
+      colorInputText: isDark ? "#fafafa" : "#171717",
+      borderRadius: "0.75rem",
+    },
+    elements: {
+      rootBox: "w-full max-w-[26rem]",
+      card: "w-full shadow-none p-0",
+      main: "w-full",
+      formFieldInput: "min-h-11 w-full border border-neutral-300 bg-white text-base text-neutral-950 shadow-none sm:text-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-white",
+      formButtonPrimary: "min-h-11",
+      socialButtons: "flex w-full justify-center",
+      socialButtonsBlockButton: "min-h-11 border border-neutral-300 dark:border-neutral-700",
+      socialButtonsBlockButton__google: "mx-auto w-40 justify-center",
+      socialButtonsBlockButton__apple: "hidden",
+      dividerRow: "hidden",
+      footerActionLink: "text-amber-700 dark:text-amber-300",
+    },
   };
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-neutral-50 px-4 py-24 text-neutral-950 dark:bg-neutral-950 dark:text-white">
+    <main className="relative flex min-h-[100svh] items-start justify-center overflow-x-hidden overflow-y-auto bg-neutral-50 px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(5rem,calc(1.5rem+env(safe-area-inset-top)))] text-neutral-950 sm:items-center sm:px-4 sm:py-24 dark:bg-neutral-950 dark:text-white">
       <div className="auth-blob auth-blob-one" aria-hidden="true" />
       <div className="auth-blob auth-blob-two" aria-hidden="true" />
       <button
         type="button"
         onClick={onBack}
-        className="absolute left-5 top-6 z-10 inline-flex items-center gap-2 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white sm:left-8"
+        className="absolute left-[max(1rem,env(safe-area-inset-left))] top-[max(1rem,env(safe-area-inset-top))] z-10 inline-flex min-h-11 items-center gap-2 px-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white sm:left-8 sm:top-6"
       >
         <ArrowLeft className="size-4" aria-hidden="true" />
         {copy.back}
       </button>
 
-      <section className="relative z-10 grid w-full max-w-5xl overflow-hidden rounded-[2rem] border border-neutral-200/80 bg-white/80 shadow-2xl shadow-amber-950/10 backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/75 dark:shadow-black/30 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="hidden flex-col justify-between bg-neutral-950 p-10 text-white lg:flex">
+      <section className="relative z-10 grid w-full max-w-5xl overflow-hidden rounded-[1.5rem] border border-neutral-200/80 bg-white/80 shadow-2xl shadow-amber-950/10 backdrop-blur-xl sm:rounded-[2rem] dark:border-white/10 dark:bg-neutral-900/75 dark:shadow-black/30 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="hidden flex-col bg-neutral-950 p-10 text-white lg:flex">
           <div>
             <BrandLogo imageClassName="w-36" />
             <Sparkles className="mb-6 size-8 text-amber-400 dark:text-amber-300" aria-hidden="true" />
@@ -92,6 +82,18 @@ export default function AuthPage({
             <p className="mt-4 max-w-sm text-sm leading-6 text-neutral-400">
               {isFrench ? "Rejoignez une communauté qui rentre ensemble." : "Join a community that helps people get home together."}
             </p>
+          </div>
+          <div className="relative my-10 flex min-h-40 flex-1 items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
+            <div className="absolute inset-x-10 top-1/2 border-t border-dashed border-amber-400/40" aria-hidden="true" />
+            <div className="relative flex w-full items-center justify-between px-10">
+              <span className="flex size-12 items-center justify-center rounded-2xl border border-amber-400/30 bg-amber-400/10 text-amber-300">
+                <MapPinned className="size-5" aria-hidden="true" />
+              </span>
+              <Route className="size-7 text-amber-300" aria-hidden="true" />
+              <span className="flex size-12 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-white">
+                <Sparkles className="size-5" aria-hidden="true" />
+              </span>
+            </div>
           </div>
           <ul className="space-y-4 text-sm text-neutral-300">
             {copy.benefits.map((benefit) => (
@@ -105,61 +107,49 @@ export default function AuthPage({
           </ul>
         </div>
 
-        <div className="p-6 sm:p-10 lg:p-14">
-          <div className="mb-8 lg:hidden">
-            <BrandLogo imageClassName="w-32" />
+        <div className="min-w-0 p-4 sm:p-8 lg:p-14">
+          <div className="mb-6 lg:hidden">
+            <BrandLogo imageClassName="w-28 sm:w-32" />
           </div>
-          <div className="mb-8">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-amber-700 dark:text-amber-300">
-              {view === "login" ? "Welcome back" : "Early access"}
-            </p>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              {view === "login" ? copy.loginTitle : copy.signupTitle}
-            </h1>
-            <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-              {view === "login" ? copy.loginDescription : copy.signupDescription}
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex min-w-0 flex-col items-center justify-center">
             {view === "signup" && (
-              <label className="block">
-                <span className="mb-2 block text-sm font-medium">{copy.name}</span>
-                <span className="relative block">
-                  <UserRound className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400" aria-hidden="true" />
-                  <input required value={name} onChange={(event) => setName(event.target.value)} className="auth-input auth-input--leading" placeholder="Alex Morgan" />
+              <label className="mb-5 flex w-full max-w-[26rem] items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(event) => setAcceptedTerms(event.target.checked)}
+                  className="mt-1 size-4 accent-amber-500"
+                  required
+                />
+                <span>
+                  {isFrench ? "J’accepte les " : "I agree to the "}
+                  <button
+                    type="button"
+                    onClick={onOpenTerms}
+                    className="font-medium text-amber-700 underline underline-offset-2 dark:text-amber-300"
+                  >
+                    {isFrench ? "conditions générales" : "Terms & Conditions"}
+                  </button>
+                  .
                 </span>
               </label>
             )}
-            <label className="block">
-              <span className="mb-2 block text-sm font-medium">{copy.email}</span>
-              <span className="relative block">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400" aria-hidden="true" />
-                <input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="auth-input auth-input--leading" placeholder="you@example.com" />
-              </span>
-            </label>
-            <label className="block">
-              <span className="mb-2 block text-sm font-medium">{copy.password}</span>
-              <span className="relative block">
-                <LockKeyhole className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-neutral-400" aria-hidden="true" />
-                <input required minLength={6} type={showPassword ? "text" : "password"} value={password} onChange={(event) => setPassword(event.target.value)} className="auth-input auth-input--password" placeholder="••••••••" />
-                <button type="button" onClick={() => setShowPassword((current) => !current)} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 dark:hover:text-white" aria-label={showPassword ? "Hide password" : "Show password"}>
-                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                </button>
-              </span>
-            </label>
-            <button type="submit" className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-full bg-amber-500 text-sm font-medium text-neutral-950 transition-colors hover:bg-amber-400">
-              {view === "login" ? copy.login : copy.signup}
-              <ArrowRight className="ml-2 size-4" aria-hidden="true" />
-            </button>
-          </form>
-
-          <p className="mt-6 text-center text-sm text-neutral-600 dark:text-neutral-400">
-            {view === "login" ? copy.switchSignup : copy.switchLogin}{" "}
-            <button type="button" onClick={() => onViewChange(view === "login" ? "signup" : "login")} className="font-medium text-amber-700 hover:underline dark:text-amber-300">
-              {view === "login" ? copy.signupLink : copy.loginLink}
-            </button>
-          </p>
+            <div className={view === "signup" && !acceptedTerms ? "pointer-events-none w-full opacity-50" : "w-full"}>
+              {view === "login" ? (
+                <SignIn
+                  routing="hash"
+                  signUpUrl="/signup"
+                  appearance={clerkAppearance}
+                />
+              ) : (
+                <SignUp
+                  routing="hash"
+                  signInUrl="/login"
+                  appearance={clerkAppearance}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </section>
     </main>

@@ -37,6 +37,8 @@ const CORRIDORS = [
 ];
 
 const WINDOWS = ["8:00–9:00 PM", "9:00–10:00 PM", "10:00–11:00 PM"];
+const RIDE_BOARD_IMAGE =
+  "https://images.unsplash.com/photo-1615463669098-521a22047a1e?auto=format&fit=crop&w=1200&q=80";
 
 const INITIAL_GROUPS: RideGroup[] = [
   {
@@ -242,6 +244,25 @@ export default function RideBoard({ language, authenticatedEmail, onSignup }: Ri
                 </div>
               )}
             </div>
+            <figure className="relative mt-6 min-h-56 overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-900 shadow-sm dark:border-white/10">
+              <img
+                src={RIDE_BOARD_IMAGE}
+                alt={isFrench ? "Vue aérienne de Yaoundé, Cameroun" : "Aerial view of Yaoundé, Cameroon"}
+                className="absolute inset-0 size-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/20 to-transparent" />
+              <figcaption className="relative flex min-h-56 items-end p-5 text-sm text-white">
+                <span>
+                  <span className="block font-medium">
+                    {isFrench ? "Rentrez ensemble." : "Get home together."}
+                  </span>
+                  <span className="mt-1 block text-xs text-white/70">
+                    {isFrench ? "Un départ partagé commence par un itinéraire commun." : "A shared departure starts with a shared route."}
+                  </span>
+                </span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
