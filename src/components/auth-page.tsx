@@ -51,7 +51,6 @@ export default function AuthPage({
       socialButtons: "flex w-full justify-center",
       socialButtonsBlockButton: "min-h-11 border border-neutral-300 dark:border-neutral-700",
       socialButtonsBlockButton__google: "mx-auto w-40 justify-center",
-      socialButtonsBlockButtonText: "text-neutral-900 dark:text-white",
       socialButtonsBlockButton__apple: "hidden",
       dividerRow: "hidden",
       footerAction: "!hidden",

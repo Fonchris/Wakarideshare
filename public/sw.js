@@ -1,4 +1,4 @@
-const CACHE_NAME = 'waka-rideshare-v1'
+const CACHE_NAME = 'waka-rideshare-v2'
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -28,14 +28,22 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) {
+  const requestUrl = new URL(event.request.url)
+  const isSameOrigin = requestUrl.origin === self.location.origin
+  const isGetRequest = event.request.method === 'GET'
+
+  if (!isGetRequest || !isSameOrigin) {
     return
   }
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.ok) {
+        const contentType = response.headers.get('content-type') ?? ''
+        const isDocument = event.request.mode === 'navigate'
+        const isHtmlResponse = contentType.includes('text/html')
+
+        if (response.ok && (isDocument || !isHtmlResponse)) {
           const responseToCache = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache))
         }
