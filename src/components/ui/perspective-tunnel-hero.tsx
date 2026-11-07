@@ -166,6 +166,13 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
     const element = containerRef.current;
     if (!element) return;
 
+    let lastTouchY: number | null = null;
+
+    const updateProgress = (delta: number) => {
+      const current = rawProgress.get();
+      rawProgress.set(Math.min(1, Math.max(0, current + delta)));
+    };
+
     const handleWheel = (event: WheelEvent) => {
       const current = rawProgress.get();
       const atStart = current <= 0 && event.deltaY < 0;
@@ -174,12 +181,38 @@ export default function PerspectiveTunnelHero({ language }: PerspectiveTunnelHer
       if (atStart || atEnd) return;
 
       event.preventDefault();
-      const next = Math.min(1, Math.max(0, current + event.deltaY * 0.0008));
-      rawProgress.set(next);
+      updateProgress(event.deltaY * 0.0008);
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      lastTouchY = event.touches[0]?.clientY ?? null;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const currentTouchY = event.touches[0]?.clientY;
+      if (lastTouchY === null || currentTouchY === undefined) return;
+
+      updateProgress((lastTouchY - currentTouchY) * 0.002);
+      lastTouchY = currentTouchY;
+    };
+
+    const handleTouchEnd = () => {
+      lastTouchY = null;
     };
 
     element.addEventListener("wheel", handleWheel, { passive: false });
-    return () => element.removeEventListener("wheel", handleWheel);
+    element.addEventListener("touchstart", handleTouchStart, { passive: true });
+    element.addEventListener("touchmove", handleTouchMove, { passive: true });
+    element.addEventListener("touchend", handleTouchEnd, { passive: true });
+    element.addEventListener("touchcancel", handleTouchEnd, { passive: true });
+
+    return () => {
+      element.removeEventListener("wheel", handleWheel);
+      element.removeEventListener("touchstart", handleTouchStart);
+      element.removeEventListener("touchmove", handleTouchMove);
+      element.removeEventListener("touchend", handleTouchEnd);
+      element.removeEventListener("touchcancel", handleTouchEnd);
+    };
   }, [rawProgress]);
 
   const pointer = useCameraParallax(!reduce);

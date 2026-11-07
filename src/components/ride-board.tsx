@@ -33,7 +33,7 @@ const CORRIDORS = [
   "Ngoa-Ekelle → Poste Centrale",
   "Ngoa-Ekelle → Mobile Omnisport",
   "Ngoa-Ekelle → Total Ngousso",
-  "Ngoa-Ekelle → Barrière en Pierre",
+  "Ngoa-Ekelle → Emana",
 ];
 
 const WINDOWS = ["8:00–9:00 PM", "9:00–10:00 PM", "10:00–11:00 PM"];
@@ -47,7 +47,7 @@ const INITIAL_GROUPS: RideGroup[] = [
     window: WINDOWS[2],
     members: 3,
     capacity: 4,
-    destinations: "Mobile Omnisport · Poste Centrale · Barrière en Pierre",
+    destinations: "Mobile Omnisport · Poste Centrale · Emana",
     coordinator: "Nadia",
     status: "Open",
   },
