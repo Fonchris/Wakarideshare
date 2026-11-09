@@ -133,3 +133,21 @@ In Clerk, add the deployed Vercel domain under the application's allowed origins
 or production instance settings when Clerk asks for it. Add the final custom
 domain too if one will be used. The existing [vercel.json](./vercel.json)
 keeps the single-page app fallback working.
+
+If the deployed sign-up form shows **"We couldn't complete this request"** and
+the browser reports `POST /v1/client/sign_ups` with status `403`, check the
+following in order:
+
+1. Confirm the deployed build uses the **live** publishable key (`pk_live_...`),
+   not the local development key (`pk_test_...`). Vite embeds this value at
+   build time, so changing the Vercel variable requires a new deployment.
+2. Confirm the live key belongs to the same Clerk production instance whose
+   allowed origins contain the exact deployed hostname (including the custom
+   domain if applicable).
+3. If the live key and origin are correct, check Clerk's production instance
+   settings for sign-up availability and bot protection. The reference shown
+   by Clerk can be used when contacting Clerk support.
+
+The `Images loaded lazily` message is a browser intervention and does not
+prevent sign-up. The development-key and structural-CSS messages are warnings;
+the 403 response is the sign-up failure.

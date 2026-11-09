@@ -10,6 +10,8 @@ import { FeatureSteps } from './components/ui/feature-section'
 import RideBoard from './components/ride-board'
 import { BrandLogo } from './components/brand-logo'
 import TermsPage from './components/terms-page'
+import FAQSection from './components/ui/faq-tabs'
+import TestimonialsSection from './components/ui/testimonials-section'
 
 function App() {
   const [language, setLanguage] = useState<Language>(() => {
@@ -77,6 +79,8 @@ function App() {
       ]}
       navLinks={[
         { label: language === 'fr' ? 'Trouver un trajet' : 'Find a ride', href: '#find-a-ride' },
+        { label: language === 'fr' ? 'Questions fréquentes' : 'FAQ', href: '#faq' },
+        { label: language === 'fr' ? 'Témoignages' : 'Testimonials', href: '#testimonials' },
         { label: language === 'fr' ? 'Accueil' : 'Home', href: '#top' },
       ]}
       brandIcon={<BrandLogo imageClassName="w-20 sm:w-28 md:w-40" />}
@@ -143,6 +147,8 @@ function App() {
             },
           ]}
         />
+        <FAQSection language={language} />
+        <TestimonialsSection language={language} />
       </main>
     </>
   )
